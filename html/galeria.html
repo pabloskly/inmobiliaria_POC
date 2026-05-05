@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería | Inmobiliaria LS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="carousel-container">
+        <h2 class="carousel-title">Nuestras Propiedades</h2>
+        
+        <div class="carousel">
+            <div class="carousel-inner" id="carouselInner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 1">
+                    <div class="carousel-caption">
+                        <h3>Villa de Lujo</h3>
+                        <p>Hermosa casa con piscina y vista panorámica.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1175&q=80" alt="Propiedad 2">
+                    <div class="carousel-caption">
+                        <h3>Mansión Moderna</h3>
+                        <p>Diseño exclusivo y espacios amplios.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 3">
+                    <div class="carousel-caption">
+                        <h3>Casa Familiar</h3>
+                        <p>Perfecta para disfrutar en familia con un gran jardín.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-control prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
+            <button class="carousel-control next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
+        </div>
+
+        <div class="carousel-indicators" id="indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+        </div>
+        
+        <div class="switch-form" style="margin-top: 2rem;">
+            <a href="login.html">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <script>
+        const inner = document.getElementById('carouselInner');
+        const items = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        let currentIndex = 0;
+        const totalItems = items.length;
+
+        function updateCarousel() {
+            inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            indicators.forEach((ind, index) => {
+                if (index === currentIndex) {
+                    ind.classList.add('active');
+                } else {
+                    ind.classList.remove('active');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            updateCarousel();
+        });
+
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.getAttribute('data-slide'));
+                updateCarousel();
+            });
+        });
+        
+        // Auto play opcional para mejorar dinamismo
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalItems;
+            updateCarousel();
+        }, 5000);
+    </script>
+</body>
+</html>
