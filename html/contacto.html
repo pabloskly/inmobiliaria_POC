@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-card">
+            <h2>Contacto</h2>
+            <p class="subtitle">Envíanos tu mensaje y te responderemos pronto</p>
+
+            <form id="contactForm" novalidate>
+                <div class="input-group" id="group-name">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre completo">
+                    <span class="error-msg">El nombre es obligatorio.</span>
+                </div>
+
+                <div class="input-group" id="group-phone">
+                    <label for="phone">Número Telefónico</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Tu número telefónico">
+                    <span class="error-msg">El número es obligatorio.</span>
+                </div>
+
+                <div class="input-group" id="group-recovery-email">
+                    <label for="recovery-email">Correo de Recuperación</label>
+                    <input type="email" id="recovery-email" name="recovery-email" placeholder="Correo alternativo">
+                    <span class="error-msg">El correo de recuperación es obligatorio.</span>
+                </div>
+
+                <div class="input-group" id="group-subject">
+                    <label for="subject">Asunto</label>
+                    <input type="text" id="subject" name="subject" placeholder="¿De qué trata tu mensaje?">
+                    <span class="error-msg">El asunto es obligatorio.</span>
+                </div>
+
+                <div class="input-group" id="group-message">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    <span class="error-msg">El mensaje no puede estar vacío.</span>
+                </div>
+
+                <button type="submit">Enviar Mensaje</button>
+
+                <div id="successMessage" class="success-msg">
+                    ¡Mensaje enviado con éxito!
+                </div>
+                
+                <div class="switch-form">
+                    <p><a href="login.html">Volver atrás</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const recoveryEmail = document.getElementById('recovery-email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            let isValid = true;
+            
+            if (!name || !phone || !recoveryEmail || !subject || !message) {
+                isValid = false;
+                alert('Por favor completa todos los campos.');
+            }
+            
+            if (isValid) {
+                document.getElementById('successMessage').style.display = 'block';
+                this.reset();
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
