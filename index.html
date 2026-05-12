@@ -24,8 +24,8 @@
         <!-- Enlaces de navegación -->
         <nav class="nav-links">
             <a href="index.html">Inicio</a>
-            <a href="html/login.html" id="loginLink">Ingreso</a>
-            <a href="html/registro.html" id="registroLink">Registro</a>
+            <a href="#" id="loginLink">Ingreso</a>
+            <a href="#" id="registroLink">Registro</a>
             <a href="html/contacto.html">Contacto</a>
             
             <!-- Configuraciones -->
@@ -149,6 +149,87 @@
         </section>
     </main>
 
+    <!-- ========================================= -->
+    <!--               MODALS START                -->
+    <!-- ========================================= -->
+    <!-- Modal Ingreso -->
+    <div id="loginModalOverlay" class="modal-overlay">
+        <div class="modal">
+            <button class="close-btn" id="closeLoginBtn">&times;</button>
+            <div class="form-card">
+                <h2>Bienvenido de nuevo</h2>
+                <p class="subtitle">Ingresa tus credenciales</p>
+                <form id="loginFormModal" novalidate>
+                    <div class="input-group" id="group-email-modal">
+                        <label for="email-modal">Correo Electrónico</label>
+                        <input type="email" id="email-modal" name="email" placeholder="ejemplo@correo.com">
+                        <span class="error-msg">Ingresa un correo válido.</span>
+                    </div>
+                    <div class="input-group" id="group-password-modal">
+                        <label for="password-modal">Contraseña</label>
+                        <input type="password" id="password-modal" name="password" placeholder="Tu contraseña">
+                        <span class="error-msg">Ingresa tu contraseña.</span>
+                    </div>
+                    <button type="submit">Ingresar</button>
+                    <div id="successMessageLogin" class="success-msg">
+                        Ingreso exitoso. Recargando...
+                    </div>
+                    <div class="switch-form">
+                        <p>¿No tienes una cuenta? <a href="#" id="switchToRegister">Regístrate</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registro -->
+    <div id="registerModalOverlay" class="modal-overlay">
+        <div class="modal">
+            <button class="close-btn" id="closeRegisterBtn">&times;</button>
+            <div class="form-card">
+                <h2>Crear una cuenta</h2>
+                <p class="subtitle">Ingresa tus datos para registrarte</p>
+                <form id="registerFormModal" novalidate>
+                    <div class="input-group" id="group-fullname-modal">
+                        <label for="fullname-modal">Nombre Completo</label>
+                        <input type="text" id="fullname-modal" name="fullname" placeholder="Tu nombre completo">
+                        <span class="error-msg">El nombre completo es obligatorio.</span>
+                    </div>
+                    <div class="input-group" id="group-username-modal">
+                        <label for="username-modal">Usuario</label>
+                        <input type="text" id="username-modal" name="username" placeholder="Tu nombre de usuario">
+                        <span class="error-msg">El usuario es obligatorio.</span>
+                    </div>
+                    <div class="input-group" id="group-email-reg-modal">
+                        <label for="email-reg-modal">Correo Electrónico</label>
+                        <input type="email" id="email-reg-modal" name="email" placeholder="ejemplo@correo.com">
+                        <span class="error-msg">Ingresa un correo electrónico válido.</span>
+                    </div>
+                    <div class="input-group" id="group-password-reg-modal">
+                        <label for="password-reg-modal">Contraseña</label>
+                        <input type="password" id="password-reg-modal" name="password" placeholder="Al menos 8 caracteres">
+                        <span class="error-msg">La contraseña debe tener al menos 8 caracteres.</span>
+                    </div>
+                    <div class="input-group" id="group-confirm-password-modal">
+                        <label for="confirmPassword-modal">Confirmar Contraseña</label>
+                        <input type="password" id="confirmPassword-modal" name="confirmPassword" placeholder="Repite tu contraseña">
+                        <span class="error-msg">Las contraseñas no coinciden.</span>
+                    </div>
+                    <button type="submit">Registrarse</button>
+                    <div class="switch-form">
+                        <p>¿Ya tienes una cuenta? <a href="#" id="switchToLogin">Ingresar</a></p>
+                    </div>
+                    <div id="successMessageRegister" class="success-msg">
+                        Registro exitoso
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================= -->
+    <!--                MODALS END                 -->
+    <!-- ========================================= -->
+
     <!-- Pie de página semántico -->
     <footer class="site-footer" style="text-align: center; padding: 2rem; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.875rem;">
         <p>&copy; 2026 Inmobiliaria POC. Todos los derechos reservados.</p>
@@ -264,6 +345,201 @@
         } else {
             if (settingsDropdown) settingsDropdown.style.display = 'none';
         }
+
+        // ==========================================
+        //         CARGA DE USUARIOS DESDE JSON
+        // ==========================================
+        // Carga inicial del archivo JSON usando Fetch API
+        if (!localStorage.getItem('users')) {
+            fetch('usuarios.json')
+                .then(response => response.json())
+                .then(data => {
+                    localStorage.setItem('users', JSON.stringify(data));
+                    console.log("Usuarios cargados desde usuarios.json exitosamente.");
+                })
+                .catch(error => console.error("Error al cargar usuarios.json:", error));
+        }
+
+        // ==========================================
+        //         LÓGICA DE MODALES
+        // ==========================================
+        const loginModalOverlay = document.getElementById('loginModalOverlay');
+        const registerModalOverlay = document.getElementById('registerModalOverlay');
+        const closeLoginBtn = document.getElementById('closeLoginBtn');
+        const closeRegisterBtn = document.getElementById('closeRegisterBtn');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const registroLinkNode = document.getElementById('registroLink');
+
+        function openModal(modal) {
+            modal.classList.add('active');
+        }
+
+        function closeModal(modal) {
+            modal.classList.remove('active');
+        }
+
+        if (!isLoggedIn) {
+            loginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openModal(loginModalOverlay);
+            });
+            
+            if (registroLinkNode) {
+                registroLinkNode.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal(registerModalOverlay);
+                });
+            }
+        }
+
+        closeLoginBtn.addEventListener('click', () => closeModal(loginModalOverlay));
+        closeRegisterBtn.addEventListener('click', () => closeModal(registerModalOverlay));
+
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal(loginModalOverlay);
+            openModal(registerModalOverlay);
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeModal(registerModalOverlay);
+            openModal(loginModalOverlay);
+        });
+
+        // Cerrar al hacer clic fuera del modal
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModalOverlay) closeModal(loginModalOverlay);
+            if (e.target === registerModalOverlay) closeModal(registerModalOverlay);
+        });
+
+        // ==========================================
+        //    LÓGICA DE FORMULARIO DE REGISTRO
+        // ==========================================
+        const registerFormModal = document.getElementById('registerFormModal');
+        const fullnameModalInput = document.getElementById('fullname-modal');
+        const usernameModalInput = document.getElementById('username-modal');
+        const emailRegModalInput = document.getElementById('email-reg-modal');
+        const passwordRegModalInput = document.getElementById('password-reg-modal');
+        const confirmPasswordModalInput = document.getElementById('confirmPassword-modal');
+        const successMessageRegister = document.getElementById('successMessageRegister');
+
+        const showErrorModal = (inputElement, message) => {
+            const group = inputElement.parentElement;
+            group.classList.add('error');
+            const errorMsg = group.querySelector('.error-msg');
+            if (message) errorMsg.textContent = message;
+        };
+
+        const clearErrorModal = (inputElement) => {
+            const group = inputElement.parentElement;
+            group.classList.remove('error');
+        };
+
+        const isValidEmailModal = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        registerFormModal.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            successMessageRegister.style.display = 'none';
+
+            if (fullnameModalInput.value.trim() === '') { showErrorModal(fullnameModalInput, 'El nombre es obligatorio.'); isValid = false; } else clearErrorModal(fullnameModalInput);
+            if (usernameModalInput.value.trim() === '') { showErrorModal(usernameModalInput, 'El usuario es obligatorio.'); isValid = false; } else clearErrorModal(usernameModalInput);
+            
+            const emailValue = emailRegModalInput.value.trim();
+            if (emailValue === '') { showErrorModal(emailRegModalInput, 'El correo es obligatorio.'); isValid = false; }
+            else if (!isValidEmailModal(emailValue)) { showErrorModal(emailRegModalInput, 'Formato inválido.'); isValid = false; }
+            else clearErrorModal(emailRegModalInput);
+
+            const passwordValue = passwordRegModalInput.value;
+            if (passwordValue.length < 8) { showErrorModal(passwordRegModalInput, 'Mínimo 8 caracteres.'); isValid = false; } else clearErrorModal(passwordRegModalInput);
+
+            if (confirmPasswordModalInput.value === '') { showErrorModal(confirmPasswordModalInput, 'Confirma tu contraseña.'); isValid = false; }
+            else if (confirmPasswordModalInput.value !== passwordValue) { showErrorModal(confirmPasswordModalInput, 'No coinciden.'); isValid = false; }
+            else clearErrorModal(confirmPasswordModalInput);
+
+            if (isValid) {
+                const userData = { fullname: fullnameModalInput.value.trim(), username: usernameModalInput.value.trim(), email: emailValue, password: passwordValue };
+                let users = JSON.parse(localStorage.getItem('users') || '[]');
+                if (users.find(u => u.email === emailValue)) {
+                    showErrorModal(emailRegModalInput, 'Correo ya registrado.');
+                    return;
+                }
+                users.push(userData);
+                
+                // Guardar en localStorage para mantener sesión activa
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // ==========================================
+                // GUARDADO FÍSICO EN ARCHIVO JSON (BLOB)
+                // ==========================================
+                // Convierte el arreglo actualizado a un formato de texto JSON
+                const jsonString = JSON.stringify(users, null, 4);
+                // Crea un objeto Blob simulando un archivo
+                const blob = new Blob([jsonString], { type: "application/json" });
+                // Crea un enlace temporal y lo pulsa para forzar la descarga del JSON
+                const link = document.createElement("a");
+                link.href = URL.createObjectURL(blob);
+                link.download = "usuarios_actualizados.json";
+                link.click();
+                URL.revokeObjectURL(link.href);
+                // ==========================================
+                
+                successMessageRegister.style.display = 'block';
+                registerFormModal.reset();
+                setTimeout(() => {
+                    closeModal(registerModalOverlay);
+                    openModal(loginModalOverlay);
+                    successMessageRegister.style.display = 'none';
+                }, 1500);
+            }
+        });
+
+        [fullnameModalInput, usernameModalInput, emailRegModalInput, passwordRegModalInput, confirmPasswordModalInput].forEach(input => {
+            input.addEventListener('input', () => clearErrorModal(input));
+        });
+
+        // ==========================================
+        //    LÓGICA DE FORMULARIO DE INGRESO
+        // ==========================================
+        const loginFormModal = document.getElementById('loginFormModal');
+        const emailModalInput = document.getElementById('email-modal');
+        const passwordModalInput = document.getElementById('password-modal');
+        const successMessageLogin = document.getElementById('successMessageLogin');
+
+        loginFormModal.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = emailModalInput.value.trim();
+            const password = passwordModalInput.value.trim();
+            
+            let isValid = true;
+            if (!email) { showErrorModal(emailModalInput, 'Ingresa tu correo.'); isValid = false; } else clearErrorModal(emailModalInput);
+            if (!password) { showErrorModal(passwordModalInput, 'Ingresa tu contraseña.'); isValid = false; } else clearErrorModal(passwordModalInput);
+            
+            if (!isValid) return;
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userName', user.fullname);
+                
+                successMessageLogin.style.display = 'block';
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            } else {
+                showErrorModal(emailModalInput, 'Credenciales incorrectas.');
+                showErrorModal(passwordModalInput, 'Credenciales incorrectas.');
+            }
+        });
+
+        [emailModalInput, passwordModalInput].forEach(input => {
+            input.addEventListener('input', () => clearErrorModal(input));
+        });
     </script>
 </body>
 </html>

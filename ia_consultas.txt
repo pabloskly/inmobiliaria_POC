@@ -45,3 +45,5 @@
   <path d="M8 8s1.5-2 4-2 4 2 4 2"></path>
 </svg>
 ```
+## Prompt 13: Migración de Formularios a Modales (Pop-ups)
+"Convierte las páginas de login y registro en modales (ventanas emergentes) dentro del `index.html`. Añade CSS para los overlays oscuros (`.modal-overlay`) y el contenedor centralizado (`.modal`). Migra toda la lógica de validación de JavaScript desde `app.js` hacia `index.html`, asegurando que los enlaces de navegación abran los modales correspondientes sin recargar la página, y que un registro exitoso cierre el modal actual para abrir el de ingreso automáticamente."

@@ -30,6 +30,7 @@ body {
         radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
     color: var(--text-color);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -42,6 +43,7 @@ body {
     width: 100%;
     max-width: 400px;
     padding: 2rem;
+    margin: auto;
 }
 
 .form-card {
@@ -576,4 +578,69 @@ body.page-layout {
 .add-contact-btn.secondary-btn:hover {
     background-color: var(--primary-color);
     color: white;
+}
+
+/* ========================================= */
+/*               MODALS (POP-UPS)              */
+/* ========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    transform: translateY(-20px);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+}
+
+.modal .form-card {
+    margin: 0; /* Override any margin */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: auto;
+    transition: color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.close-btn:hover {
+    color: var(--text-color);
+    background: transparent;
+    transform: scale(1.1);
 }
