@@ -103,6 +103,18 @@
             }
             
             if (isValid) {
+                // Guardar los datos en un array dentro de localStorage
+                const configData = {
+                    name: name,
+                    phone: phone,
+                    backupEmail: backupEmail,
+                    date: new Date().toISOString()
+                };
+                
+                let contactConfigs = JSON.parse(localStorage.getItem('contactConfigs') || '[]');
+                contactConfigs.push(configData);
+                localStorage.setItem('contactConfigs', JSON.stringify(contactConfigs));
+
                 document.getElementById('successMessage').style.display = 'block';
                 setTimeout(() => {
                     document.getElementById('successMessage').style.display = 'none';

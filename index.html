@@ -201,8 +201,8 @@
                     </div>
                     <div class="input-group" id="group-password-reg-modal">
                         <label for="password-reg-modal">Contraseña</label>
-                        <input type="password" id="password-reg-modal" name="password" placeholder="Al menos 8 caracteres">
-                        <span class="error-msg">La contraseña debe tener al menos 8 caracteres.</span>
+                        <input type="password" id="password-reg-modal" name="password" placeholder="Mínimo 8 caracteres y 1 mayúscula">
+                        <span class="error-msg">La contraseña debe tener al menos 8 caracteres y 1 mayúscula.</span>
                     </div>
                     <div class="input-group" id="group-confirm-password-modal">
                         <label for="confirmPassword-modal">Confirmar Contraseña</label>
@@ -447,7 +447,16 @@
             else clearErrorModal(emailRegModalInput);
 
             const passwordValue = passwordRegModalInput.value;
-            if (passwordValue.length < 8) { showErrorModal(passwordRegModalInput, 'Mínimo 8 caracteres.'); isValid = false; } else clearErrorModal(passwordRegModalInput);
+            const uppercaseRegex = /[A-Z]/;
+            if (passwordValue.length < 8) { 
+                showErrorModal(passwordRegModalInput, 'Mínimo 8 caracteres.'); 
+                isValid = false; 
+            } else if (!uppercaseRegex.test(passwordValue)) {
+                showErrorModal(passwordRegModalInput, 'Debe contener al menos una mayúscula.'); 
+                isValid = false; 
+            } else {
+                clearErrorModal(passwordRegModalInput);
+            }
 
             if (confirmPasswordModalInput.value === '') { showErrorModal(confirmPasswordModalInput, 'Confirma tu contraseña.'); isValid = false; }
             else if (confirmPasswordModalInput.value !== passwordValue) { showErrorModal(confirmPasswordModalInput, 'No coinciden.'); isValid = false; }

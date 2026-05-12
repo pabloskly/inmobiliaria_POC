@@ -125,6 +125,18 @@
             }
             
             if (isValid) {
+                // Guardar los datos en un array dentro de localStorage
+                const contactData = {
+                    name: name,
+                    email: email,
+                    message: message,
+                    date: new Date().toISOString()
+                };
+                
+                let contactMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+                contactMessages.push(contactData);
+                localStorage.setItem('contactMessages', JSON.stringify(contactMessages));
+
                 document.getElementById('successMessage').style.display = 'block';
                 formElement.reset();
                 charCount.textContent = '0/500';

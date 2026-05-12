@@ -23,10 +23,25 @@ document.addEventListener('DOMContentLoaded', () => {
         group.classList.remove('error');
     };
 
-    // Validar formato de email usando Regex
+    // Validar formato de email usando Regex y verificar dominio
     const isValidEmail = (email) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        // Expresión regular mejorada para validar la estructura del correo
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) return false;
+
+        // Validar parámetros de cantidad de caracteres reales en el dominio
+        const domainPart = email.split('@')[1];
+        const domainSubParts = domainPart.split('.');
+        const domainName = domainSubParts[0]; // Ej. 'gmail' en 'gmail.com'
+        const tld = domainSubParts[domainSubParts.length - 1]; // Ej. 'com' en 'gmail.com'
+
+        // Verificar que el nombre del dominio tenga al menos 2 caracteres
+        // y el dominio de nivel superior (TLD) tenga entre 2 y 10 caracteres
+        if (domainName.length < 2 || tld.length < 2 || tld.length > 10) {
+            return false;
+        }
+
+        return true;
     };
 
     function validarDatos(e) {
@@ -51,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
             clearError(usernameInput);
         }
 
-        // 2. Validar Email (formato regex)
+        // 2. Validar Email (formato regex y dominio)
         const emailValue = emailInput.value.trim();
         if (emailValue === '') {
             showError(emailInput, 'El correo electrónico es obligatorio.');
             isValid = false;
         } else if (!isValidEmail(emailValue)) {
-            showError(emailInput, 'Ingresa un correo electrónico con formato válido.');
+            showError(emailInput, 'Ingresa un correo válido con un dominio real (ej. @gmail.com).');
             isValid = false;
         } else {
             clearError(emailInput);
