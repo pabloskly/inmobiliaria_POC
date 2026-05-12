@@ -20,3 +20,28 @@
 
 ## Prompt 7: Implementación de Etiquetas Semánticas HTML5
 "Asegúrate de que todas las páginas del proyecto de la inmobiliaria incluyan estructuras semánticas de HTML5, como agregar las etiquetas <footer> y <main> donde corresponda, para que el diseño cumpla con los estándares web y todos los requisitos de evaluación final."
+
+## Prompt 8: Uso de localStorage y Arreglos de Objetos para Simular Base de Datos
+"Modifica el archivo app.js para guardar los datos capturados en el formulario de registro. Usa un objeto literal para agrupar nombre, usuario, correo y contraseña. Luego, introduce este objeto dentro de un arreglo global y guárdalo usando localStorage, simulando así una base de datos para validar el login posteriormente."
+
+## Prompt 9: Lógica de Autenticación y Estado de Sesión
+"Implementa la lógica en JavaScript para validar el inicio de sesión. Al enviar el formulario, verifica si el correo y la contraseña coinciden con los guardados en el arreglo de usuarios en localStorage. Si es correcto, crea un estado de 'isLoggedIn' en true y muestra un saludo personalizado en el encabezado. Además, oculta la opción de registro y cambia 'Ingreso' por 'Cerrar Sesión'."
+
+## Prompt 10: Implementación de Menú Desplegable de Configuración
+"Crea un menú desplegable (dropdown) oculto de 'Configuraciones' en el navbar con un ícono de engranaje (SVG). Dentro del menú, coloca secciones para 'Configurar Contacto' y 'Cambiar Contraseña'. Agrega la lógica JavaScript necesaria para que el menú alterne su visibilidad al hacer clic en el engranaje y se cierre automáticamente al hacer clic en cualquier zona externa."
+
+## Prompt 11: Estilización y Diseño Visual (Variables CSS)
+"Aplica una hoja de estilos moderna a los formularios y el menú de navegación del proyecto inmobiliario utilizando fondos oscuros (ej. #0f172a), colores vibrantes para los botones, bordes curvos (border-radius) y efectos hover suaves. Utiliza variables CSS en :root para mantener una paleta de colores consistente en todo el sitio."
+
+## Prompt 12: Generación e Inserción de Ícono Logo (SVG)
+"Genera un ícono SVG minimalista y moderno para usarlo como logotipo de la Inmobiliaria. El ícono debe ser escalable, con trazos limpios, y estar integrado directamente en el HTML dentro del contenedor de la marca (nav-logo) para darle identidad visual al proyecto sin depender de imágenes externas."
+
+<!-- Código SVG del ícono propuesto para que lo copies y pegues en tu HTML (ej. dentro de <div class="nav-logo">) -->
+```html
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px; vertical-align: middle;">
+  <circle cx="12" cy="12" r="10"></circle>
+  <path d="M8 12s1.5-2 4-2 4 2 4 2"></path>
+  <path d="M8 16s1.5-2 4-2 4 2 4 2"></path>
+  <path d="M8 8s1.5-2 4-2 4 2 4 2"></path>
+</svg>
+```
