@@ -63,10 +63,23 @@ document.addEventListener('DOMContentLoaded', () => {
             clearError(emailInput);
         }
 
-        // 3. Validar Contraseña (al menos 8 caracteres)
+        // 3. Validar Contraseña (al menos 8 caracteres, 1 mayúscula, 1 número, 1 carácter especial)
         const passwordValue = passwordInput.value;
+        const uppercaseRegex = /[A-Z]/;
+        const numberRegex = /[0-9]/;
+        const specialCharRegex = /[^A-Za-z0-9]/;
+        
         if (passwordValue.length < 8) {
             showError(passwordInput, 'La contraseña debe tener al menos 8 caracteres.');
+            isValid = false;
+        } else if (!uppercaseRegex.test(passwordValue)) {
+            showError(passwordInput, 'La contraseña debe contener al menos una letra mayúscula.');
+            isValid = false;
+        } else if (!numberRegex.test(passwordValue)) {
+            showError(passwordInput, 'La contraseña debe contener al menos un número.');
+            isValid = false;
+        } else if (!specialCharRegex.test(passwordValue)) {
+            showError(passwordInput, 'La contraseña debe contener al menos un carácter especial.');
             isValid = false;
         } else {
             clearError(passwordInput);
