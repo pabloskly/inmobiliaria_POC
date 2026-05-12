@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return emailRegex.test(email);
     };
 
-    form.addEventListener('submit', (e) => {
+    function validarDatos(e) {
         e.preventDefault(); // Evita que se envíe el formulario por defecto
         
         let isValid = true;
@@ -86,19 +86,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Si todo es válido
         if (isValid) {
-            // Aquí puedes procesar los datos (enviar al servidor, etc.)
-            console.log('Datos válidos:', {
+            // Guardar datos del usuario en localStorage
+            const userData = {
                 fullname: fullnameInput.value.trim(),
                 username: usernameInput.value.trim(),
                 email: emailValue,
                 password: passwordValue
-            });
+            };
+            
+            // Obtener usuarios existentes o crear array vacío
+            let users = JSON.parse(localStorage.getItem('users') || '[]');
+            
+            // Verificar si el email ya existe
+            const existingUser = users.find(user => user.email === emailValue);
+            if (existingUser) {
+                showError(emailInput, 'Este correo electrónico ya está registrado.');
+                return;
+            }
+            
+            // Agregar nuevo usuario
+            users.push(userData);
+            localStorage.setItem('users', JSON.stringify(users));
             
             // Mostrar mensaje de éxito y limpiar formulario
             successMessage.style.display = 'block';
             form.reset();
+            
+            // Redirigir al apartado de ingreso después de 1.5 segundos
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1500);
         }
-    });
+    }
+
+    form.addEventListener('submit', validarDatos);
 
     // Limpiar errores al escribir
     const inputs = [fullnameInput, usernameInput, emailInput, passwordInput, confirmPasswordInput];

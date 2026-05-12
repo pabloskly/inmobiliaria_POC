@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración de Contacto</title>
+    <!-- Fuentes de Google para la tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <!-- Contenedor principal de la página -->
+    <div class="container">
+        <!-- Tarjeta del formulario -->
+        <div class="form-card">
+            <h2>Configurar Contacto</h2>
+            <p class="subtitle">Actualiza tu información personal</p>
+
+            <!-- Formulario -->
+            <form id="configContactForm" novalidate>
+                <!-- Campo para el nombre -->
+                <div class="input-group" id="group-name">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" placeholder="Tu nombre completo">
+                    <span class="error-msg">El nombre es obligatorio.</span>
+                </div>
+
+                <!-- Campo para el número telefónico -->
+                <div class="input-group" id="group-phone">
+                    <label for="phone">Número Telefónico</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Tu número telefónico">
+                    <span class="error-msg">El número es obligatorio.</span>
+                </div>
+
+                <!-- Campo para el correo de respaldo -->
+                <div class="input-group" id="group-backup-email">
+                    <label for="backupEmail">Correo de Respaldo</label>
+                    <input type="email" id="backupEmail" name="backupEmail" placeholder="Correo alternativo">
+                    <span class="error-msg">Ingresa un correo válido.</span>
+                </div>
+
+                <!-- Botón para enviar el formulario -->
+                <button type="submit">Guardar Cambios</button>
+
+                <!-- Mensaje de éxito al enviar -->
+                <div id="successMessage" class="success-msg">
+                    Información actualizada con éxito
+                </div>
+                
+                <!-- Opción para volver atrás -->
+                <div class="switch-form">
+                    <p><a href="../index.html">Volver al inicio</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pie de página semántico -->
+    <footer class="site-footer" style="text-align: center; padding: 2rem; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.875rem;">
+        <p>&copy; 2026 Inmobiliaria POC. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Lógica y validación -->
+    <script>
+        function validarDatos(formElement) {
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const backupEmail = document.getElementById('backupEmail').value.trim();
+            
+            const groupName = document.getElementById('group-name');
+            const groupPhone = document.getElementById('group-phone');
+            const groupEmail = document.getElementById('group-backup-email');
+            
+            groupName.classList.remove('error');
+            groupPhone.classList.remove('error');
+            groupEmail.classList.remove('error');
+            
+            let isValid = true;
+            
+            if (!name) {
+                groupName.classList.add('error');
+                isValid = false;
+            }
+            if (!phone) {
+                groupPhone.classList.add('error');
+                isValid = false;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!backupEmail) {
+                groupEmail.classList.add('error');
+                groupEmail.querySelector('.error-msg').textContent = 'El correo es obligatorio.';
+                isValid = false;
+            } else if (!emailRegex.test(backupEmail)) {
+                groupEmail.classList.add('error');
+                groupEmail.querySelector('.error-msg').textContent = 'Ingresa un correo válido.';
+                isValid = false;
+            }
+            
+            if (isValid) {
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                    window.location.href = '../index.html';
+                }, 2000);
+            }
+        }
+
+        document.getElementById('configContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            validarDatos(this);
+        });
+
+        document.getElementById('name').addEventListener('input', () => document.getElementById('group-name').classList.remove('error'));
+        document.getElementById('phone').addEventListener('input', () => document.getElementById('group-phone').classList.remove('error'));
+        document.getElementById('backupEmail').addEventListener('input', () => document.getElementById('group-backup-email').classList.remove('error'));
+    </script>
+</body>
+</html>

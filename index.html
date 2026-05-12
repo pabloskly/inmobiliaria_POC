@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería | Inmobiliaria LS</title>
+    <title>Galería | Inmobiliaria POC</title>
     <!-- Fuentes de Google para la tipografía -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,20 +13,57 @@
 </head>
 <body class="page-layout">
 
-    <!-- Barra de navegación superior -->
+    <!-- ========================================= -->
+    <!--          ENCABEZADO Y NAVEGACIÓN          -->
+    <!-- ========================================= -->
     <header class="top-nav">
         <!-- Logotipo de la empresa -->
-        <div class="nav-logo">Inmobiliaria LS</div>
+        <div class="nav-logo">Inmobiliaria POC</div>
+        <!-- Mensaje de bienvenida para usuario logueado -->
+        <div id="userWelcome" class="user-welcome" style="display: none;"></div>
         <!-- Enlaces de navegación -->
         <nav class="nav-links">
             <a href="index.html">Inicio</a>
-            <a href="html/login.html">Ingreso</a>
-            <a href="html/registro.html">Registro</a>
+            <a href="html/login.html" id="loginLink">Ingreso</a>
+            <a href="html/registro.html" id="registroLink">Registro</a>
             <a href="html/contacto.html">Contacto</a>
+            
+            <!-- Configuraciones -->
+            <div class="settings-dropdown" id="settingsDropdown">
+                <button id="settingsBtn" class="settings-btn" aria-label="Configuraciones">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </button>
+                <div id="settingsMenu" class="settings-menu">
+                    <div class="settings-header">
+                        <h3>Configuraciones</h3>
+                    </div>
+                    <div class="settings-content">
+                        <div class="settings-section">
+                            <h4>Información Personal</h4>
+                            <p class="settings-desc">Gestiona tus datos de contacto y correos de respaldo.</p>
+                            
+                            <button class="add-contact-btn" onclick="window.location.href='html/config_contacto.html'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                Configurar Contacto
+                            </button>
+                            
+                            <hr class="settings-divider">
+                            
+                            <button class="add-contact-btn secondary-btn" onclick="window.location.href='html/cambiar_password.html'">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                Cambiar Contraseña
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <!-- Contenido principal de la página -->
+    <!-- ========================================= -->
+    <!--            CARRUSEL PRINCIPAL             -->
+    <!-- ========================================= -->
     <main class="main-content">
         <!-- Sección superior del carrusel con menor tamaño -->
         <section class="top-carousel-section">
@@ -57,6 +94,20 @@
                                 <p>Perfecta para la familia.</p>
                             </div>
                         </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 4">
+                            <div class="carousel-caption">
+                                <h3>Chalet con Jardín</h3>
+                                <p>Disfruta de la naturaleza en tu propio hogar.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 5">
+                            <div class="carousel-caption">
+                                <h3>Apartamento Céntrico</h3>
+                                <p>Conecta con la ciudad desde el mejor lugar.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Controles para cambiar de imagen (Anterior/Siguiente) -->
@@ -69,11 +120,15 @@
                     <span class="indicator active" data-slide="0"></span>
                     <span class="indicator" data-slide="1"></span>
                     <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                    <span class="indicator" data-slide="4"></span>
                 </div>
             </div>
         </section>
         
-        <!-- Apartado principal de la página -->
+        <!-- ========================================= -->
+        <!--           SERVICIOS DESTACADOS            -->
+        <!-- ========================================= -->
         <section class="content-section">
             <h2>Nuestros Servicios</h2>
             <!-- Cuadrícula de tarjetas de servicios -->
@@ -94,8 +149,16 @@
         </section>
     </main>
 
-    <!-- Lógica de funcionamiento del carrusel de imágenes -->
+    <!-- Pie de página semántico -->
+    <footer class="site-footer" style="text-align: center; padding: 2rem; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.875rem;">
+        <p>&copy; 2026 Inmobiliaria POC. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- ========================================= -->
+    <!--             LÓGICA JAVASCRIPT             -->
+    <!-- ========================================= -->
     <script>
+        // --- Variables del Carrusel ---
         const inner = document.getElementById('carouselInner');
         const items = document.querySelectorAll('.carousel-item');
         const prevBtn = document.getElementById('prevBtn');
@@ -105,7 +168,7 @@
         let currentIndex = 0;
         const totalItems = items.length;
 
-        function updateCarousel() {
+        function cambiarImagen() {
             inner.style.transform = `translateX(-${currentIndex * 100}%)`;
             indicators.forEach((ind, index) => {
                 if (index === currentIndex) {
@@ -116,28 +179,91 @@
             });
         }
 
+        let carouselInterval;
+
+        function startCarousel() {
+            carouselInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                cambiarImagen();
+            }, 2000);
+        }
+
+        function actualizarDOM() {
+            clearInterval(carouselInterval);
+            startCarousel();
+        }
+
         nextBtn.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
+            cambiarImagen();
+            actualizarDOM();
         });
 
         prevBtn.addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + totalItems) % totalItems;
-            updateCarousel();
+            cambiarImagen();
+            actualizarDOM();
         });
 
         indicators.forEach(indicator => {
             indicator.addEventListener('click', (e) => {
                 currentIndex = parseInt(e.target.getAttribute('data-slide'));
-                updateCarousel();
+                cambiarImagen();
+                actualizarDOM();
             });
         });
         
-        // Auto play opcional para mejorar dinamismo
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % totalItems;
-            updateCarousel();
-        }, 5000);
+        // Iniciar auto play
+        startCarousel();
+
+        // Lógica del menú de configuraciones
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsMenu = document.getElementById('settingsMenu');
+
+        if (settingsBtn && settingsMenu) {
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsMenu.classList.toggle('active');
+            });
+
+            // Cerrar el menú si se hace clic fuera de él
+            document.addEventListener('click', (e) => {
+                if (!settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
+                    settingsMenu.classList.remove('active');
+                }
+            });
+        }
+
+        // Lógica de estado de sesión
+        const loginLink = document.getElementById('loginLink');
+        const userWelcome = document.getElementById('userWelcome');
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+        const settingsDropdown = document.getElementById('settingsDropdown');
+
+        if (isLoggedIn) {
+            const userName = localStorage.getItem('userName') || 'Usuario';
+            userWelcome.textContent = `Bienvenido, ${userName}`;
+            userWelcome.style.display = 'block';
+            
+            loginLink.textContent = 'Cerrar Sesión';
+            loginLink.href = '#';
+            
+            const registroLink = document.getElementById('registroLink');
+            if (registroLink) registroLink.style.display = 'none';
+            
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Cerrar sesión
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+                // Recargar la página para actualizar la navegación
+                window.location.reload();
+            });
+        } else {
+            if (settingsDropdown) settingsDropdown.style.display = 'none';
+        }
     </script>
 </body>
 </html>

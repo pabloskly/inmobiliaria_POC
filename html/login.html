@@ -39,6 +39,11 @@
                 <!-- Botón para enviar el formulario -->
                 <button type="submit">Ingresar</button>
 
+                <!-- Mensaje de éxito al completar el registro -->
+                <div id="successMessage" class="success-msg">
+                    Ingreso exitoso. Redirigiendo...
+                </div>
+
                 <!-- Opción para ir al registro si no tiene cuenta -->
                 <div class="switch-form">
                     <p>¿No tienes una cuenta? <a href="registro.html">Regístrate</a></p>
@@ -47,20 +52,74 @@
         </div>
     </div>
 
+    <!-- Pie de página semántico -->
+    <footer class="site-footer" style="text-align: center; padding: 2rem; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.875rem;">
+        <p>&copy; 2026 Inmobiliaria POC. Todos los derechos reservados.</p>
+    </footer>
+
     <!-- Lógica de validación del formulario de ingreso -->
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
             
-            // Simulación simple de validación
-            if(email && password) {
-                // Redirige al formulario de contacto
-                window.location.href = 'contacto.html';
-            } else {
-                alert('Por favor, ingresa tus credenciales.');
+            const groupEmail = document.getElementById('group-email');
+            const groupPassword = document.getElementById('group-password');
+            
+            // Limpiar errores previos
+            groupEmail.classList.remove('error');
+            groupPassword.classList.remove('error');
+            
+            let isValid = true;
+            
+            if (!email) {
+                groupEmail.classList.add('error');
+                groupEmail.querySelector('.error-msg').textContent = 'Ingresa tu correo electrónico.';
+                isValid = false;
             }
+            
+            if (!password) {
+                groupPassword.classList.add('error');
+                groupPassword.querySelector('.error-msg').textContent = 'Ingresa tu contraseña.';
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Obtener usuarios registrados
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            
+            // Buscar usuario con email y contraseña coincidentes
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Guardar estado de sesión
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userName', user.fullname);
+                
+                // Mostrar éxito y redirigir
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1500);
+            } else {
+                groupEmail.classList.add('error');
+                groupPassword.classList.add('error');
+                groupEmail.querySelector('.error-msg').textContent = 'Credenciales incorrectas.';
+                groupPassword.querySelector('.error-msg').textContent = 'Credenciales incorrectas.';
+            }
+        });
+
+        // Limpiar errores al escribir
+        document.getElementById('email').addEventListener('input', () => {
+            document.getElementById('group-email').classList.remove('error');
+        });
+        document.getElementById('password').addEventListener('input', () => {
+            document.getElementById('group-password').classList.remove('error');
         });
     </script>
 </body>

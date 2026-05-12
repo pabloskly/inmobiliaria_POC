@@ -22,6 +22,7 @@
 
             <!-- Formulario de contacto -->
             <form id="contactForm" novalidate>
+
                 <!-- Campo para el nombre -->
                 <div class="input-group" id="group-name">
                     <label for="name">Nombre</label>
@@ -29,31 +30,18 @@
                     <span class="error-msg">El nombre es obligatorio.</span>
                 </div>
 
-                <!-- Campo para el número telefónico -->
-                <div class="input-group" id="group-phone">
-                    <label for="phone">Número Telefónico</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Tu número telefónico">
-                    <span class="error-msg">El número es obligatorio.</span>
-                </div>
-
-                <!-- Campo para el correo de recuperación -->
-                <div class="input-group" id="group-recovery-email">
-                    <label for="recovery-email">Correo de Recuperación</label>
-                    <input type="email" id="recovery-email" name="recovery-email" placeholder="Correo alternativo">
-                    <span class="error-msg">El correo de recuperación es obligatorio.</span>
-                </div>
-
-                <!-- Campo para el asunto del mensaje -->
-                <div class="input-group" id="group-subject">
-                    <label for="subject">Asunto</label>
-                    <input type="text" id="subject" name="subject" placeholder="¿De qué trata tu mensaje?">
-                    <span class="error-msg">El asunto es obligatorio.</span>
+                <!-- Campo para el email -->
+                <div class="input-group" id="group-email">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="tu@correo.com">
+                    <span class="error-msg">El email es obligatorio.</span>
                 </div>
 
                 <!-- Área de texto para el mensaje -->
                 <div class="input-group" id="group-message">
                     <label for="message">Mensaje</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+                    <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje aquí..." maxlength="500"></textarea>
+                    <div style="text-align: right; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;" id="charCount">0/500</div>
                     <span class="error-msg">El mensaje no puede estar vacío.</span>
                 </div>
 
@@ -67,37 +55,86 @@
                 
                 <!-- Opción para volver atrás -->
                 <div class="switch-form">
-                    <p><a href="login.html">Volver atrás</a></p>
+                    <p><a href="../index.html">Volver atrás</a></p>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Pie de página semántico -->
+    <footer class="site-footer" style="text-align: center; padding: 2rem; margin-top: auto; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.875rem;">
+        <p>&copy; 2026 Inmobiliaria POC. Todos los derechos reservados.</p>
+    </footer>
+
     <!-- Lógica y validación del formulario de contacto -->
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        
+        messageInput.addEventListener('input', () => {
+            const currentLength = messageInput.value.length;
+            charCount.textContent = `${currentLength}/500`;
+            document.getElementById('group-message').classList.remove('error');
+        });
+        
+        document.getElementById('name').addEventListener('input', () => {
+            document.getElementById('group-name').classList.remove('error');
+        });
+        
+        document.getElementById('email').addEventListener('input', () => {
+            document.getElementById('group-email').classList.remove('error');
+        });
+
+        function validarDatos(formElement) {
             const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const recoveryEmail = document.getElementById('recovery-email').value.trim();
-            const subject = document.getElementById('subject').value.trim();
-            const message = document.getElementById('message').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = messageInput.value.trim();
+            
+            const groupName = document.getElementById('group-name');
+            const groupEmail = document.getElementById('group-email');
+            const groupMessage = document.getElementById('group-message');
+            
+            // Limpiar errores
+            groupName.classList.remove('error');
+            groupEmail.classList.remove('error');
+            groupMessage.classList.remove('error');
             
             let isValid = true;
             
-            if (!name || !phone || !recoveryEmail || !subject || !message) {
+            if (!name) {
+                groupName.classList.add('error');
                 isValid = false;
-                alert('Por favor completa todos los campos.');
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                groupEmail.classList.add('error');
+                groupEmail.querySelector('.error-msg').textContent = 'El email es obligatorio.';
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                groupEmail.classList.add('error');
+                groupEmail.querySelector('.error-msg').textContent = 'Ingresa un email válido.';
+                isValid = false;
+            }
+            
+            if (!message) {
+                groupMessage.classList.add('error');
+                isValid = false;
             }
             
             if (isValid) {
                 document.getElementById('successMessage').style.display = 'block';
-                this.reset();
+                formElement.reset();
+                charCount.textContent = '0/500';
                 setTimeout(() => {
                     document.getElementById('successMessage').style.display = 'none';
                 }, 3000);
             }
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            validarDatos(this);
         });
     </script>
 </body>

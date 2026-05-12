@@ -1,3 +1,6 @@
+/* ========================================= */
+/*               VARIABLES & RESET             */
+/* ========================================= */
 :root {
     --primary-color: #6366f1;
     --primary-hover: #4f46e5;
@@ -16,6 +19,9 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
+/* ========================================= */
+/*               GLOBAL STYLES                 */
+/* ========================================= */
 body {
     background-color: var(--background);
     background-image: 
@@ -29,6 +35,9 @@ body {
     min-height: 100vh;
 }
 
+/* ========================================= */
+/*               FORM COMPONENTS               */
+/* ========================================= */
 .container {
     width: 100%;
     max-width: 400px;
@@ -167,7 +176,9 @@ button:active {
     text-decoration: underline;
 }
 
-/* Carrusel Styles */
+/* ========================================= */
+/*               CAROUSEL WIDGET               */
+/* ========================================= */
 .carousel-container {
     width: 100%;
     max-width: 800px;
@@ -196,7 +207,7 @@ button:active {
 
 .carousel-inner {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .carousel-item {
@@ -209,6 +220,11 @@ button:active {
     height: 400px;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.05);
 }
 
 .carousel-caption {
@@ -249,11 +265,16 @@ button:active {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .carousel-control:hover {
     background: var(--primary-color);
+    transform: translateY(-50%) scale(1.15);
+}
+
+.carousel-control:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .carousel-control.prev {
@@ -284,7 +305,9 @@ button:active {
     background: var(--primary-color);
 }
 
-/* Page Layout */
+/* ========================================= */
+/*               PAGE LAYOUT                   */
+/* ========================================= */
 body.page-layout {
     display: block;
     min-height: 100vh;
@@ -309,6 +332,15 @@ body.page-layout {
     font-weight: 700;
     color: var(--text-color);
     letter-spacing: 1px;
+}
+
+.user-welcome {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-links {
@@ -394,4 +426,154 @@ body.page-layout {
 .service-card p {
     color: var(--text-muted);
     line-height: 1.6;
+}
+
+/* ========================================= */
+/*               SETTINGS MENU                 */
+/* ========================================= */
+.settings-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.settings-btn {
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: auto;
+    min-width: auto;
+}
+
+.settings-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+    transform: rotate(45deg);
+}
+
+.settings-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 1rem;
+    width: 300px;
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.settings-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.settings-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.settings-content {
+    padding: 1rem 1.25rem;
+}
+
+.settings-section h4 {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.settings-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.settings-input-group {
+    margin-bottom: 1rem;
+}
+
+.settings-input-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.settings-input-group input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    color: var(--text-color);
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.settings-input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.settings-divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 1.25rem 0;
+}
+
+.add-contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.6rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-contact-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.add-contact-btn.secondary-btn {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.add-contact-btn.secondary-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
 }

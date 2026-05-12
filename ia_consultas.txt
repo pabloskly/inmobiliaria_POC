@@ -1,0 +1,22 @@
+# Consultas de Inteligencia Artificial (Evidencias)
+
+## Prompt 1: Validaciones de Registro (Regex y Longitud)
+"Crea un formulario de registro HTML con campos para nombre, usuario, correo, contraseña y confirmación. Usa JavaScript para validar que el correo tenga un formato regex válido, que la contraseña tenga al menos 8 caracteres y que ambas contraseñas coincidan. Evita que el formulario se envíe por defecto y muestra los errores en pantalla debajo de cada input, no en un alert."
+
+## Prompt 2: Creación del Carrusel
+"Crea la estructura HTML, CSS y la lógica en JavaScript para un carrusel de imágenes moderno. Debe tener al menos 5 imágenes, botones de anterior y siguiente, indicadores en la parte inferior, y rotación automática cada 2 segundos. Organiza las funciones para modificar el DOM."
+
+## Prompt 3: Refinamiento de Contacto y Login (DOM vs Alert)
+"En los formularios de login y contacto, sustituye las alertas (alerts) por validaciones que manipulen el DOM, añadiendo bordes rojos y span de mensajes. Agrega también un contador de caracteres que se actualice en tiempo real para el campo de mensaje en contacto, limitando a 500 caracteres, y que se limpie cuando el envío sea exitoso."
+
+## Prompt 4: Nomenclatura Modular
+"Renombra las funciones en el JavaScript de los formularios y el carrusel para que sigan una estructura modular en español, como validarDatos() para procesar formularios, cambiarImagen() para deslizar el carrusel y actualizarDOM() para refrescar los temporizadores."
+
+## Prompt 5: Actualización del Formulario de Contacto
+"Agrega dos nuevos campos al formulario de contacto: uno para el número telefónico y otro para un correo electrónico de recuperación. Asegúrate de que mantengan los mismos estilos visuales que el resto de los campos y actualiza las validaciones necesarias."
+
+## Prompt 6: Reparación de Enlaces de Navegación y Comentarios
+"Corrige las rutas relativas en los menús de navegación de todos los archivos HTML (index, login, registro, contacto, config_contacto) para que funcionen correctamente. Además, agrega comentarios descriptivos en español a todas las secciones principales del código."
+
+## Prompt 7: Implementación de Etiquetas Semánticas HTML5
+"Asegúrate de que todas las páginas del proyecto de la inmobiliaria incluyan estructuras semánticas de HTML5, como agregar las etiquetas <footer> y <main> donde corresponda, para que el diseño cumpla con los estándares web y todos los requisitos de evaluación final."
