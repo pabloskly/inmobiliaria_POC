@@ -9,50 +9,79 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="page-layout">
 
-    <div class="carousel-container">
-        <h2 class="carousel-title">Nuestras Propiedades</h2>
-        
-        <div class="carousel">
-            <div class="carousel-inner" id="carouselInner">
-                <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 1">
-                    <div class="carousel-caption">
-                        <h3>Villa de Lujo</h3>
-                        <p>Hermosa casa con piscina y vista panorámica.</p>
+    <header class="top-nav">
+        <div class="nav-logo">Inmobiliaria LS</div>
+        <nav class="nav-links">
+            <a href="galeria.html">Inicio</a>
+            <a href="login.html">Ingreso</a>
+            <a href="index.html">Registro</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Sección superior del carrusel con menor tamaño -->
+        <section class="top-carousel-section">
+            <div class="carousel-container small-carousel">
+                <h2 class="carousel-title">Propiedades Destacadas</h2>
+                
+                <div class="carousel">
+                    <div class="carousel-inner" id="carouselInner">
+                        <div class="carousel-item active">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 1">
+                            <div class="carousel-caption">
+                                <h3>Villa de Lujo</h3>
+                                <p>Hermosa casa con piscina.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1175&q=80" alt="Propiedad 2">
+                            <div class="carousel-caption">
+                                <h3>Mansión Moderna</h3>
+                                <p>Diseño exclusivo y espacios amplios.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 3">
+                            <div class="carousel-caption">
+                                <h3>Casa Familiar</h3>
+                                <p>Perfecta para la familia.</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <button class="carousel-control prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
+                    <button class="carousel-control next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1175&q=80" alt="Propiedad 2">
-                    <div class="carousel-caption">
-                        <h3>Mansión Moderna</h3>
-                        <p>Diseño exclusivo y espacios amplios.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Propiedad 3">
-                    <div class="carousel-caption">
-                        <h3>Casa Familiar</h3>
-                        <p>Perfecta para disfrutar en familia con un gran jardín.</p>
-                    </div>
+
+                <div class="carousel-indicators" id="indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
                 </div>
             </div>
-
-            <button class="carousel-control prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
-            <button class="carousel-control next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
-        </div>
-
-        <div class="carousel-indicators" id="indicators">
-            <span class="indicator active" data-slide="0"></span>
-            <span class="indicator" data-slide="1"></span>
-            <span class="indicator" data-slide="2"></span>
-        </div>
+        </section>
         
-        <div class="switch-form" style="margin-top: 2rem;">
-            <a href="login.html">Volver al Inicio</a>
-        </div>
-    </div>
+        <!-- Apartado principal de la página -->
+        <section class="content-section">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Ventas</h3>
+                    <p>Te ayudamos a encontrar la propiedad de tus sueños, ofreciéndote un catálogo extenso y atención personalizada en cada paso de tu compra.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Alquileres</h3>
+                    <p>Contamos con una amplia variedad de propiedades para alquilar que se ajustan a tu estilo de vida y presupuesto.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Asesoría Legal</h3>
+                    <p>Acompañamiento profesional en todo el proceso legal y financiero para que tu inversión sea segura y confiable.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script>
         const inner = document.getElementById('carouselInner');
