@@ -4,55 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto</title>
+    <!-- Fuentes de Google para la tipografía -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos principal -->
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
+    <!-- Contenedor principal de la página -->
     <div class="container">
+        <!-- Tarjeta del formulario de contacto -->
         <div class="form-card">
             <h2>Contacto</h2>
             <p class="subtitle">Envíanos tu mensaje y te responderemos pronto</p>
 
+            <!-- Formulario de contacto -->
             <form id="contactForm" novalidate>
+                <!-- Campo para el nombre -->
                 <div class="input-group" id="group-name">
                     <label for="name">Nombre</label>
                     <input type="text" id="name" name="name" placeholder="Tu nombre completo">
                     <span class="error-msg">El nombre es obligatorio.</span>
                 </div>
 
+                <!-- Campo para el número telefónico -->
                 <div class="input-group" id="group-phone">
                     <label for="phone">Número Telefónico</label>
                     <input type="tel" id="phone" name="phone" placeholder="Tu número telefónico">
                     <span class="error-msg">El número es obligatorio.</span>
                 </div>
 
+                <!-- Campo para el correo de recuperación -->
                 <div class="input-group" id="group-recovery-email">
                     <label for="recovery-email">Correo de Recuperación</label>
                     <input type="email" id="recovery-email" name="recovery-email" placeholder="Correo alternativo">
                     <span class="error-msg">El correo de recuperación es obligatorio.</span>
                 </div>
 
+                <!-- Campo para el asunto del mensaje -->
                 <div class="input-group" id="group-subject">
                     <label for="subject">Asunto</label>
                     <input type="text" id="subject" name="subject" placeholder="¿De qué trata tu mensaje?">
                     <span class="error-msg">El asunto es obligatorio.</span>
                 </div>
 
+                <!-- Área de texto para el mensaje -->
                 <div class="input-group" id="group-message">
                     <label for="message">Mensaje</label>
                     <textarea id="message" name="message" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
                     <span class="error-msg">El mensaje no puede estar vacío.</span>
                 </div>
 
+                <!-- Botón para enviar el formulario -->
                 <button type="submit">Enviar Mensaje</button>
 
+                <!-- Mensaje de éxito al enviar -->
                 <div id="successMessage" class="success-msg">
-                    ¡Mensaje enviado con éxito!
+                    Mensaje enviado con éxito
                 </div>
                 
+                <!-- Opción para volver atrás -->
                 <div class="switch-form">
                     <p><a href="login.html">Volver atrás</a></p>
                 </div>
@@ -60,6 +73,7 @@
         </div>
     </div>
 
+    <!-- Lógica y validación del formulario de contacto -->
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();

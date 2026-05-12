@@ -4,28 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería | Inmobiliaria LS</title>
+    <!-- Fuentes de Google para la tipografía -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="page-layout">
 
+    <!-- Barra de navegación superior -->
     <header class="top-nav">
+        <!-- Logotipo de la empresa -->
         <div class="nav-logo">Inmobiliaria LS</div>
+        <!-- Enlaces de navegación -->
         <nav class="nav-links">
-            <a href="galeria.html">Inicio</a>
-            <a href="login.html">Ingreso</a>
-            <a href="index.html">Registro</a>
+            <a href="index.html">Inicio</a>
+            <a href="html/login.html">Ingreso</a>
+            <a href="html/registro.html">Registro</a>
+            <a href="html/contacto.html">Contacto</a>
         </nav>
     </header>
 
+    <!-- Contenido principal de la página -->
     <main class="main-content">
         <!-- Sección superior del carrusel con menor tamaño -->
         <section class="top-carousel-section">
             <div class="carousel-container small-carousel">
                 <h2 class="carousel-title">Propiedades Destacadas</h2>
                 
+                <!-- Contenedor del carrusel de imágenes -->
                 <div class="carousel">
                     <div class="carousel-inner" id="carouselInner">
                         <div class="carousel-item active">
@@ -51,10 +59,12 @@
                         </div>
                     </div>
 
+                    <!-- Controles para cambiar de imagen (Anterior/Siguiente) -->
                     <button class="carousel-control prev" id="prevBtn" aria-label="Anterior">&#10094;</button>
                     <button class="carousel-control next" id="nextBtn" aria-label="Siguiente">&#10095;</button>
                 </div>
 
+                <!-- Indicadores de posición del carrusel (puntos) -->
                 <div class="carousel-indicators" id="indicators">
                     <span class="indicator active" data-slide="0"></span>
                     <span class="indicator" data-slide="1"></span>
@@ -66,6 +76,7 @@
         <!-- Apartado principal de la página -->
         <section class="content-section">
             <h2>Nuestros Servicios</h2>
+            <!-- Cuadrícula de tarjetas de servicios -->
             <div class="services-grid">
                 <div class="service-card">
                     <h3>Ventas</h3>
@@ -83,6 +94,7 @@
         </section>
     </main>
 
+    <!-- Lógica de funcionamiento del carrusel de imágenes -->
     <script>
         const inner = document.getElementById('carouselInner');
         const items = document.querySelectorAll('.carousel-item');
